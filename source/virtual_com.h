@@ -89,7 +89,7 @@ typedef struct _usb_cdc_acm_info
 #endif /* _USB_CDC_VCOM_H_ */
 
 
-#define DEVICE_ID	0
+
 #define LPC_ADC_SIZE	4
 #define	LPC_MCU_SIZE	4
 

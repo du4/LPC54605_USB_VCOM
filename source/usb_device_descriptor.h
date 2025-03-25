@@ -8,6 +8,8 @@
 #ifndef _USB_DEVICE_DESCRIPTOR_H_
 #define _USB_DEVICE_DESCRIPTOR_H_ 1
 
+#define DEVICE_ID	0
+
 /*******************************************************************************
  * Definitions
  ******************************************************************************/
@@ -15,7 +17,7 @@
 #define USB_DEVICE_DEMO_BCD_VERSION     (0x0101U)
 
 #define USB_DEVICE_VID (0x1FC9U)
-#define USB_DEVICE_PID (0x0017U)
+#define USB_DEVICE_PID ((DEVICE_ID<<16) | 0x17U)
 
 /* Communication  Class Codes */
 #define CDC_COMM_CLASS (0x02U)
