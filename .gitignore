@@ -54,5 +54,6 @@ Debug/
 Release/
 tools/
 *.launch
+!LPC54605/mcuxpresso/*
 .settings
 
