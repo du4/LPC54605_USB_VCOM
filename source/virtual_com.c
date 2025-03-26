@@ -78,7 +78,9 @@ static uint8_t s_lineCoding[LINE_CODING_SIZE] = {
 
 
 // USER VARIABLES //
+int id = 0;
 char str[80];
+extern uint8_t g_UsbDeviceDescriptor[];
 //uint32_t TX_SIZE = 60;//sizeof(cdc_tx_buf);
 //uint8_t  cdc_tx_buf[TX_SIZE];// = "LPC would like to share my experience to create test application and measure the USB performance for both FS and HS with external ULPI PHY (USB3300) on STM32F4 MCU series. To do that Olimex STM32-H405 board and USB3300 module was used as hardware. Because of high speed the connection between them was made with very short wires and using default pin connection case with USB3300 reset pin connected to PA6. In addition to use default USB FS Device pin-out USB_P was re-wired from PC4 to PA9. For debugging USART\r\n";
 uint32_t cutId = 0;
@@ -88,25 +90,6 @@ uint32_t uninterruptableMeasurementWatchdog = 0;
 uint32_t g_systickCounter = 0;
 
 QLpcPacket pLpcBufToSend;
-
-void fillUsbCutMuxSample(uint8_t* cdc_tx_buf_pointer){
-	uint64_t longValue = 0;
-	uint16_t adc12BitArray[LPC_ADC_SIZE], index;
-	for (int step = 0; step < 8; ++step) {
-		longValue = 0;
-
-		for (int i = 0; i < LPC_ADC_SIZE; ++i) {
-			index = LPC_ADC_SIZE - 1 - i;
-			adc12BitArray[i] = (i/2)*100 + 10*step + (2*DEVICE_ID+i%2); // 100=section 10=step 1=electrode
-			longValue |= (uint64_t)((uint64_t)adc12BitArray[index] << (i*12));
-		}
-		longValue = (longValue & 0x00000000FFFFFFFF) << 32 | (longValue & 0xFFFFFFFF00000000) >> 32;
-		longValue = (longValue & 0x0000FFFF0000FFFF) << 16 | (longValue & 0xFFFF0000FFFF0000) >> 16;
-		longValue = (longValue & 0x00FF00FF00FF00FF) << 8  | (longValue & 0xFF00FF00FF00FF00) >> 8;
-		longValue = longValue>>16;
-		memcpy((cdc_tx_buf_pointer + 6*step) ,  &longValue, 6);
-	}
-}
 
 void fillLpcEctHsSampleData(uint32_t cutId, QLpcPacket* pLpcBufToSend, int cutsPerPacket){
 	int stepSize = 8;
@@ -119,12 +102,12 @@ void fillLpcEctHsSampleData(uint32_t cutId, QLpcPacket* pLpcBufToSend, int cutsP
 		pLpcBufToSend->command = usb_sop;
 		for (uint8_t cut= 0; cut < cutsPerPacket; ++cut) {
 			pLpcBufToSend->packets[cut].cutIndex = cutId - cutsPerPacket + cut;
-			pLpcBufToSend->packets[cut].status = status | ((DEVICE_ID << 20) & 0x00F00000) | cut;
+			pLpcBufToSend->packets[cut].status = status | ((id << 20) & 0x00F00000) | cut;
 			elSamples = (float*)(&pLpcBufToSend->packets[cut].data[0]);
 
 			for (int step = 0; step < stepSize; ++step) {
 				for (int adc = 0; adc < LPC_ADC_SIZE; ++adc) {
-					value = (1000*(adc%2) +	DEVICE_ID*100 + adc/2*10 + step) * 4095.0/3.3 ;
+					value = (1000*(adc%2) +	id*100 + adc/2*10 + step) * 4095.0/3.3 ;
 					*(elSamples + (LPC_ADC_SIZE*step + adc)) = value;
 				}
 			}
@@ -653,6 +636,12 @@ static void APPInit(void)
 #if (defined(FSL_FEATURE_SOC_SYSMPU_COUNT) && (FSL_FEATURE_SOC_SYSMPU_COUNT > 0U))
     SYSMPU_Enable(SYSMPU, 0);
 #endif /* FSL_FEATURE_SOC_SYSMPU_COUNT */
+
+    uint32_t id1 =  GPIO_PinRead(GPIO, 0,  9);
+    uint32_t id2 =  GPIO_PinRead(GPIO, 1,  13);
+    uint32_t id3 =  GPIO_PinRead(GPIO, 0,  13);
+    id = (id3<<2) | (id2<<1) | id1;
+	g_UsbDeviceDescriptor[11] = id;
 
     s_cdcVcom.speed        = USB_SPEED_HIGH;
     s_cdcVcom.attach       = 0;

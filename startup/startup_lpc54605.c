@@ -1,5 +1,5 @@
 //*****************************************************************************
-// LPC54628 startup code for use with MCUXpresso IDE
+// LPC54605 startup code for use with MCUXpresso IDE
 //
 // Version : 160420
 //*****************************************************************************
@@ -256,7 +256,7 @@ void (* const g_pfnVectors[])(void) = {
     PendSV_Handler,                    // The PendSV handler
     SysTick_Handler,                   // The SysTick handler
 
-    // Chip Level - LPC54628
+    // Chip Level - LPC54605
     WDT_BOD_IRQHandler,         // 16: Windowed watchdog timer, Brownout detect
     DMA0_IRQHandler,            // 17: DMA controller
     GINT0_IRQHandler,           // 18: GPIO group 0

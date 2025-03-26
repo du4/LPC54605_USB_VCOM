@@ -25,6 +25,12 @@ extern "C" {
  */
 void BOARD_InitBootPins(void);
 
+#define PIO013_DIGIMODE_DIGITAL 0x01u /*!<@brief Select Analog/Digital mode.: Digital mode. */
+#define PIO013_FUNC_ALT0 0x00u        /*!<@brief Selects pin function.: Alternative connection 0. */
+#define PIO09_DIGIMODE_DIGITAL 0x01u  /*!<@brief Select Analog/Digital mode.: Digital mode. */
+#define PIO09_FUNC_ALT0 0x00u         /*!<@brief Selects pin function.: Alternative connection 0. */
+#define PIO113_DIGIMODE_DIGITAL 0x01u /*!<@brief Select Analog/Digital mode.: Digital mode. */
+#define PIO113_FUNC_ALT0 0x00u        /*!<@brief Selects pin function.: Alternative connection 0. */
 #define PIO127_DIGIMODE_DIGITAL 0x01u /*!<@brief Select Analog/Digital mode.: Digital mode. */
 #define PIO127_FUNC_ALT4 0x04u        /*!<@brief Selects pin function.: Alternative connection 4. */
 
