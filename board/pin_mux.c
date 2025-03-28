@@ -44,10 +44,10 @@ BOARD_InitPins:
   - {pin_num: '12', peripheral: USBHSH, signal: USB_DM, pin_signal: USB1_DM}
   - {pin_num: '13', peripheral: USBHSH, signal: USB_DP, pin_signal: USB1_DP}
   - {pin_num: '9', peripheral: USBHSH, signal: USB_VBUS, pin_signal: USB1_VBUS}
-  - {pin_num: '68', peripheral: SYSCON, signal: CLKOUT, pin_signal: PIO1_27/FC2_RTS_SCL_SSEL1/SD_D(4)/CTIMER0_MAT3/CLKOUT/EMC_A(9)}
   - {pin_num: '65', peripheral: GPIO, signal: 'PIO0, 9', pin_signal: PIO0_9/FC3_SSEL2/SD_POW_EN/FC5_TXD_SCL_MISO/SCI1_IO/EMC_D(7), direction: INPUT}
   - {pin_num: '67', peripheral: GPIO, signal: 'PIO0, 13', pin_signal: PIO0_13/FC1_CTS_SDA_SSEL0/UTICK_CAP0/CTIMER0_CAP0/SCT0_GPI0, direction: INPUT}
   - {pin_num: '66', peripheral: GPIO, signal: 'PIO1, 13', pin_signal: PIO1_13/FC6_RXD_SDA_MOSI_DATA/CTIMER1_CAP2/USB0_OVERCURRENTN/USB0_FRAME/EMC_DQM(0), direction: INPUT}
+  - {pin_num: '68', peripheral: SYSCON, signal: CLKOUT, pin_signal: PIO1_27/FC2_RTS_SCL_SSEL1/SD_D(4)/CTIMER0_MAT3/CLKOUT/EMC_A(9)}
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS ***********
  */
 /* clang-format on */

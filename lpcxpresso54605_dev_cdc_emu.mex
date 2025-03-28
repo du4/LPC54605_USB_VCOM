@@ -64,7 +64,6 @@
                   <pin peripheral="USBHSH" signal="USB_DM" pin_num="12" pin_signal="USB1_DM"/>
                   <pin peripheral="USBHSH" signal="USB_DP" pin_num="13" pin_signal="USB1_DP"/>
                   <pin peripheral="USBHSH" signal="USB_VBUS" pin_num="9" pin_signal="USB1_VBUS"/>
-                  <pin peripheral="SYSCON" signal="CLKOUT" pin_num="68" pin_signal="PIO1_27/FC2_RTS_SCL_SSEL1/SD_D(4)/CTIMER0_MAT3/CLKOUT/EMC_A(9)"/>
                   <pin peripheral="GPIO" signal="PIO0, 9" pin_num="65" pin_signal="PIO0_9/FC3_SSEL2/SD_POW_EN/FC5_TXD_SCL_MISO/SCI1_IO/EMC_D(7)">
                      <pin_features>
                         <pin_feature name="direction" value="INPUT"/>
@@ -80,6 +79,7 @@
                         <pin_feature name="direction" value="INPUT"/>
                      </pin_features>
                   </pin>
+                  <pin peripheral="SYSCON" signal="CLKOUT" pin_num="68" pin_signal="PIO1_27/FC2_RTS_SCL_SSEL1/SD_D(4)/CTIMER0_MAT3/CLKOUT/EMC_A(9)"/>
                </pins>
             </function>
          </functions_list>
